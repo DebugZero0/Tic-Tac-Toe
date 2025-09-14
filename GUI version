@@ -1,0 +1,66 @@
+import tkinter as tk
+from tkinter import messagebox
+
+def checkWin(xState, zState):
+    wins = [[0, 1, 2], [3, 4, 5], 
+            [6, 7, 8], [0, 3, 6], 
+            [1, 4, 7], [2, 5, 8], 
+            [0, 4, 8], [2, 4, 6]]
+    for win in wins:
+        if xState[win[0]] + xState[win[1]] + xState[win[2]] == 3:
+            return "X"
+        if zState[win[0]] + zState[win[1]] + zState[win[2]] == 3:
+            return "O"
+    return None
+
+class TicTacToe:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Tic Tac Toe")
+        self.xState = [0]*9
+        self.zState = [0]*9
+        self.turn = 1  # 1 for X, 0 for O
+        self.buttons = []
+        self.create_board()
+
+    def create_board(self):
+        for i in range(9):
+            btn = tk.Button(self.root, text=" ", font=("Arial", 20), width=6, height=2,
+                            command=lambda i=i: self.play(i))
+            btn.grid(row=i//3, column=i%3)
+            self.buttons.append(btn)
+
+    def play(self, index):
+        if self.buttons[index]["text"] != " ":
+            return  # Ignore if already taken
+
+        if self.turn == 1:
+            self.buttons[index]["text"] = "X"
+            self.xState[index] = 1
+        else:
+            self.buttons[index]["text"] = "O"
+            self.zState[index] = 1
+
+        winner = checkWin(self.xState, self.zState)
+        if winner:
+            messagebox.showinfo("Game Over", f"{winner} Won the Match!")
+            self.reset_game()
+            return
+        elif all(self.xState[i] or self.zState[i] for i in range(9)):
+            messagebox.showinfo("Game Over", "It's a Draw!")
+            self.reset_game()
+            return
+
+        self.turn = 1 - self.turn  # Switch turn
+
+    def reset_game(self):
+        self.xState = [0]*9
+        self.zState = [0]*9
+        self.turn = 1
+        for btn in self.buttons:
+            btn["text"] = " "
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    game = TicTacToe(root)
+    root.mainloop()
