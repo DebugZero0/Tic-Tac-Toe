@@ -1,5 +1,6 @@
-# Tic-Tac-Toe
+# 🎮 Tic-Tac-Toe
 
+# For python version
 <h2>✨ Features </h2>
 
 <ul>
@@ -63,4 +64,16 @@ Thanks for playing!
 <h2>🙋 Contributions </h2>
 
 Pull requests welcome! Keep changes small and tested. For feature requests, open an issue with steps to reproduce and expected behavior.
+
+# This is for the website 
+
+A simple and fun Tic Tac Toe game built with HTML, CSS, and JavaScript.  
+Play it live here: 👉 [Play Now](https://debugzero0.github.io/Tic-Tac-Toe/) 
+
+## Features
+- Responsive design
+- Gradient motion background
+- Glassy restart button ✨
+- Classic X and O gameplay
+
 
